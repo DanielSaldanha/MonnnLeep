@@ -5,15 +5,12 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour
 {
     public delegate void Mensagem();
-    public static Mensagem mude;
-    //Mude m;
-   // LevelManager l;
+    public static Mensagem suba;
+   
+   
     void Start()
     {
-     //   m = FindObjectOfType<Mude>();
-     //   l = FindObjectOfType<LevelManager>();
-
-      //  l.mude += m.Inverçao;
+       
     }
 
    
@@ -22,11 +19,11 @@ public class LevelManager : MonoBehaviour
        
       
     }
-    public void Inverçao()
+    public void Alerta()
     {
-        if (mude != null)
+        if (suba != null)
         {
-            mude();
+            suba();
         }
     }
 }

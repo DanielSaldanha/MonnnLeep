@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class PlayerMoving : MonoBehaviour
 {
+    //BOTAO ELEVADOR
+    [SerializeField] bool autismo, autismo2;
+
+    [SerializeField] Transform BP;//botao pisiçao
+    GameObject Clone;
+    [SerializeField] GameObject obj;
+
     public delegate void Mensagem();
     public static Mensagem mude2;
     Rigidbody2D rb;
@@ -11,12 +18,16 @@ public class PlayerMoving : MonoBehaviour
     [SerializeField] int cu = 0;
     void Start()
     {
+        
         rb = GetComponent<Rigidbody2D>();
+        autismo = false;
+        autismo2 = false;
     }
     void Update()
     {
         Andando();
         Pulo();
+        BotaoElevador();
     }
     void Andando()
     {
@@ -37,11 +48,47 @@ public class PlayerMoving : MonoBehaviour
         }
     
     }
+    void BotaoElevador()
+    {
+
+       
+        if (autismo == true)
+        {
+           // autismo2 = true;
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                autismo2 = !autismo2;
+                Destroy(Clone);
+            }
+
+        }
+        if (autismo2 == true)
+        {
+            LevelManager main;
+            main = FindObjectOfType<LevelManager>();
+            main.Alerta();
+          //  Debug.Log("autismooooooo");
+        }
+    }
     private void OnTriggerEnter2D(Collider2D c)
     {
          if(c.tag == "Chao")
          {
             cu = 0;
-         }  
+         }
+
+        if (c.tag == "Elevador")
+        {
+            Clone = Instantiate(obj, BP.position, Quaternion.identity);
+            autismo = true;                  
+        }
+    }
+    //TOCAVEIS
+    private void OnTriggerExit2D(Collider2D c)
+    {
+        if (c.tag == "Elevador")
+        {
+            Destroy(Clone);
+        }
     }
 }

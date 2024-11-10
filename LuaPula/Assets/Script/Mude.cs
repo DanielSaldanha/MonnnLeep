@@ -18,7 +18,7 @@ public class Mude : MonoBehaviour
     void Start()
     {
         startColor = sr.color;// vai pegar a primeira cor que ver
-        LevelManager.mude += Inverçao;
+      
         PlayerMoving.mude2 += Inverçao;
         inverter = true;
     }
