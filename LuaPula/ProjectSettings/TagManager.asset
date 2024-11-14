@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Chao
   - Elevador
+  - chave
+  - porta
   layers:
   - Default
   - TransparentFX

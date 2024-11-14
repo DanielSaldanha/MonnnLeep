@@ -4,18 +4,27 @@ using UnityEngine;
 
 public class PlayerMoving : MonoBehaviour
 {
-    //BOTAO ELEVADOR
-    [SerializeField] bool autismo, autismo2;
+    //VARIAVEIS MULTI USO
+    GameObject Clone, Clone2;
+    [SerializeField] GameObject PCP;//Posiçao Cabeça Player
 
+    //ELEVADOR
+    [SerializeField] bool autismo, autismo2;
     [SerializeField] Transform BP;//botao pisiçao
-    GameObject Clone;
     [SerializeField] GameObject obj;
 
+    //MENSAGENS
     public delegate void Mensagem();
     public static Mensagem mude2;
+
+    //MOVIMENTAÇAO
     Rigidbody2D rb;
     [SerializeField] float speed, jump;
     [SerializeField] int cu = 0;
+
+    //PORTA
+    [SerializeField] int Chave = 0;
+    public GameObject CloneChave;
     void Start()
     {
         
@@ -28,6 +37,7 @@ public class PlayerMoving : MonoBehaviour
         Andando();
         Pulo();
         BotaoElevador();
+       
     }
     void Andando()
     {
@@ -70,6 +80,7 @@ public class PlayerMoving : MonoBehaviour
           //  Debug.Log("autismooooooo");
         }
     }
+
     private void OnTriggerEnter2D(Collider2D c)
     {
          if(c.tag == "Chao")
@@ -82,13 +93,29 @@ public class PlayerMoving : MonoBehaviour
             Clone = Instantiate(obj, BP.position, Quaternion.identity);
             autismo = true;                  
         }
+
+        if (c.tag == "porta" && Chave == 1)
+        {
+            Destroy(c.gameObject);
+            Chave -= 1;
+            Destroy(Clone2);
+        }
+
+        if (c.tag == "chave")
+        {
+            Chave += 1;
+            Destroy(c.gameObject);
+            Clone2 = Instantiate(CloneChave, PCP.transform.position, Quaternion.identity);
+            Clone2.transform.parent = PCP.transform;
+
+        }
     }
-    //TOCAVEIS
     private void OnTriggerExit2D(Collider2D c)
     {
         if (c.tag == "Elevador")
         {
             Destroy(Clone);
         }
+       
     }
 }

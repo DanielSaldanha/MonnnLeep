@@ -4,20 +4,21 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
+
     public delegate void Mensagem();
     public static Mensagem suba;
-   
-   
+
+
     void Start()
     {
-       
+
     }
 
-   
+
     void Update()
     {
-       
-      
+
+
     }
     public void Alerta()
     {
@@ -27,3 +28,4 @@ public class LevelManager : MonoBehaviour
         }
     }
 }
+    
