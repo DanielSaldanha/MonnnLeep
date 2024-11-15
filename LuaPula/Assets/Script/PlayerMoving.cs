@@ -15,7 +15,7 @@ public class PlayerMoving : MonoBehaviour
 
     //MENSAGENS
     public delegate void Mensagem();
-    public static Mensagem mude2;
+    public static Mensagem mude2, inimigoAlert,inimigoPara;
 
     //MOVIMENTAÇAO
     Rigidbody2D rb;
@@ -87,20 +87,17 @@ public class PlayerMoving : MonoBehaviour
          {
             cu = 0;
          }
-
         if (c.tag == "Elevador")
         {
             Clone = Instantiate(obj, BP.position, Quaternion.identity);
             autismo = true;                  
         }
-
         if (c.tag == "porta" && Chave == 1)
         {
             Destroy(c.gameObject);
             Chave -= 1;
             Destroy(Clone2);
         }
-
         if (c.tag == "chave")
         {
             Chave += 1;
@@ -109,6 +106,16 @@ public class PlayerMoving : MonoBehaviour
             Clone2.transform.parent = PCP.transform;
 
         }
+        if(c.tag == "inimigo")
+        {
+            
+            if(inimigoAlert != null)
+            {
+                inimigoAlert();
+            }
+            
+           
+        }
     }
     private void OnTriggerExit2D(Collider2D c)
     {
@@ -116,6 +123,17 @@ public class PlayerMoving : MonoBehaviour
         {
             Destroy(Clone);
         }
-       
+        if (c.tag == "inimigo")
+        {
+
+            
+            if (inimigoPara != null)
+            {
+                inimigoPara();
+            }
+            
+            
+        }
+
     }
 }
