@@ -5,8 +5,8 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour
 {
 
-    public delegate void Mensagem();
-    public static Mensagem suba;
+   // public delegate void Mensagem();
+  //  public static Mensagem Mensagem;
 
 
     void Start()
@@ -20,12 +20,6 @@ public class LevelManager : MonoBehaviour
 
 
     }
-    public void Alerta()
-    {
-        if (suba != null)
-        {
-            suba();
-        }
-    }
+  
 }
     

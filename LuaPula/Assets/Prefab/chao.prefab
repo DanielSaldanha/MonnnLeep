@@ -105,8 +105,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_SortingOrder: 4
+  m_Sprite: {fileID: -781024878, guid: b1a46340fe6bb284ca85c39e61c6cd2b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -132,5 +132,5 @@ MonoBehaviour:
   Espinho: {fileID: 3262363922987407503, guid: bd64bf398a933c946a7cc6c4fb53d571, type: 3}
   "posi\xE7ao": {fileID: 3072809526824588072}
   sr: {fileID: 1097917318929304978}
-  haverColor: {r: 0.3349294, g: 0.3297437, b: 0.3584906, a: 1}
+  haverColor: {r: 0.9622642, g: 0.040909424, b: 0.022694906, a: 1}
   inverter: 0

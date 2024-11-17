@@ -9,13 +9,18 @@ public class Elevador : MonoBehaviour
     [SerializeField] bool Aviso;
     void Start()
     {
-        LevelManager.suba += Subir;
+       // LevelManager.suba += Subir;
         Aviso = false;
     }
 
    
     void Update()
     {
+        if(PlayerMoving.main.autismo2 == true)
+        {
+
+            Subir();
+        }
         if(Aviso == true)
         {
             time += Time.deltaTime;

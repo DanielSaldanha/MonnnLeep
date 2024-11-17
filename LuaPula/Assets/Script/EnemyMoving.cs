@@ -10,13 +10,14 @@ public class EnemyMoving : MonoBehaviour
     bool partida;
     void Start()
     {
-       PlayerMoving.inimigoAlert += um;
-       PlayerMoving.inimigoPara += dois;
+      // PlayerMoving.inimigoAlert += um;
+      // PlayerMoving.inimigoPara += dois;
     }
 
     
     void Update()
     {
+        Alerta();
         Mova();
         if (partida == true)
         {
@@ -39,5 +40,17 @@ public class EnemyMoving : MonoBehaviour
     public void dois()
     {
         partida = false;
+    }
+    void Alerta()
+    {
+        Alertador main = FindObjectOfType<Alertador>();
+        if(main.avisador == true)
+        {
+            um();
+        }
+        else
+        {
+            dois();
+        }
     }
 }

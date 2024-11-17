@@ -7,15 +7,17 @@ public class PlayerMoving : MonoBehaviour
     //VARIAVEIS MULTI USO
     GameObject Clone, Clone2;
     [SerializeField] GameObject PCP;//Posiçao Cabeça Player
+   public static PlayerMoving main;
 
     //ELEVADOR
-    [SerializeField] bool autismo, autismo2;
+    [SerializeField]public bool autismo, autismo2;
     [SerializeField] Transform BP;//botao pisiçao
     [SerializeField] GameObject obj;
 
+
     //MENSAGENS
     public delegate void Mensagem();
-    public static Mensagem mude2, inimigoAlert,inimigoPara;
+    public static Mensagem mude2;//, inimigoAlert,inimigoPara;
 
     //MOVIMENTAÇAO
     Rigidbody2D rb;
@@ -25,9 +27,12 @@ public class PlayerMoving : MonoBehaviour
     //PORTA
     [SerializeField] int Chave = 0;
     public GameObject CloneChave;
+
+   
     void Start()
     {
-        
+       
+        main = this;
         rb = GetComponent<Rigidbody2D>();
         autismo = false;
         autismo2 = false;
@@ -42,7 +47,7 @@ public class PlayerMoving : MonoBehaviour
     void Andando()
     {
         float Mover = Input.GetAxis("Horizontal");
-        rb.velocity = new Vector2(Mover * speed * Time.deltaTime, rb.velocity.y);
+        rb.velocity = new Vector2(Mover * speed, rb.velocity.y);
     }
     void Pulo()
     {
@@ -64,7 +69,7 @@ public class PlayerMoving : MonoBehaviour
        
         if (autismo == true)
         {
-           // autismo2 = true;
+          
             if (Input.GetKeyDown(KeyCode.E))
             {
                 autismo2 = !autismo2;
@@ -72,13 +77,7 @@ public class PlayerMoving : MonoBehaviour
             }
 
         }
-        if (autismo2 == true)
-        {
-            LevelManager main;
-            main = FindObjectOfType<LevelManager>();
-            main.Alerta();
-          //  Debug.Log("autismooooooo");
-        }
+      
     }
 
     private void OnTriggerEnter2D(Collider2D c)
@@ -106,16 +105,7 @@ public class PlayerMoving : MonoBehaviour
             Clone2.transform.parent = PCP.transform;
 
         }
-        if(c.tag == "inimigo")
-        {
-            
-            if(inimigoAlert != null)
-            {
-                inimigoAlert();
-            }
-            
-           
-        }
+     
     }
     private void OnTriggerExit2D(Collider2D c)
     {
@@ -123,17 +113,6 @@ public class PlayerMoving : MonoBehaviour
         {
             Destroy(Clone);
         }
-        if (c.tag == "inimigo")
-        {
-
-            
-            if (inimigoPara != null)
-            {
-                inimigoPara();
-            }
-            
-            
-        }
-
+       
     }
 }
