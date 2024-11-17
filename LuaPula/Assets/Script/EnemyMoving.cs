@@ -10,8 +10,7 @@ public class EnemyMoving : MonoBehaviour
     bool partida;
     void Start()
     {
-      // PlayerMoving.inimigoAlert += um;
-      // PlayerMoving.inimigoPara += dois;
+     
     }
 
     

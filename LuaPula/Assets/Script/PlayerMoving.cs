@@ -17,7 +17,7 @@ public class PlayerMoving : MonoBehaviour
 
     //MENSAGENS
     public delegate void Mensagem();
-    public static Mensagem mude2;//, inimigoAlert,inimigoPara;
+    public static Mensagem mude2;
 
     //MOVIMENTAÇAO
     Rigidbody2D rb;
@@ -39,9 +39,13 @@ public class PlayerMoving : MonoBehaviour
     }
     void Update()
     {
-        Andando();
         Pulo();
         BotaoElevador();
+       
+    }
+    void FixedUpdate()
+    {
+        Andando();
        
     }
     void Andando()
