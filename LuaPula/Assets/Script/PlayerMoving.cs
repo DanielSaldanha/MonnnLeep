@@ -28,6 +28,9 @@ public class PlayerMoving : MonoBehaviour
     [SerializeField] int Chave = 0;
     public GameObject CloneChave;
 
+    //VIDA
+    public bool vidao;
+
    
     void Start()
     {
@@ -86,10 +89,7 @@ public class PlayerMoving : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D c)
     {
-         if(c.tag == "Chao")
-         {
-            cu = 0;
-         }
+        
         if (c.tag == "Elevador")
         {
             Clone = Instantiate(obj, BP.position, Quaternion.identity);
@@ -109,6 +109,13 @@ public class PlayerMoving : MonoBehaviour
             Clone2.transform.parent = PCP.transform;
 
         }
+        if(c.tag == "inimigo")
+        {
+          
+            vidao = true;
+            PlayerMain main = FindObjectOfType<PlayerMain>();
+            main.VidaPerdida();
+        }
      
     }
     private void OnTriggerExit2D(Collider2D c)
@@ -117,6 +124,21 @@ public class PlayerMoving : MonoBehaviour
         {
             Destroy(Clone);
         }
+        if (c.tag == "inimigo")
+        {
+
+            vidao = false;
+        }
+
+    }
+
+    private void OnCollisionEnter2D(Collision2D c)
+    {
+        if (c.gameObject.layer == 8)
+        {
+            cu = 0;
+        }
        
     }
+
 }

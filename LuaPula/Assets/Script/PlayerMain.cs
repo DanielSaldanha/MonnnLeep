@@ -8,11 +8,29 @@ public class PlayerMain : MonoBehaviour
     //TIRO
     [SerializeField] Tiro prefabTiro;
     Camera camera;
+
+    //VIDA
+   public GameObject[] vida;
+   public int vidaAtual = 4;
+    
     void Start()
     {
         camera = Camera.main; // essa variavel tem o valor de MainCamera
     }
     void Update()
+    {
+        Clicado();
+       
+
+
+    }
+    //ELEVADOR
+    private void OnTriggerEnter2D(Collider2D c)
+    {
+        
+       
+    }
+    void Clicado()
     {
         if (Input.GetMouseButtonDown(0)) // 0 = esquerda e 1 = direita
         {
@@ -26,10 +44,15 @@ public class PlayerMain : MonoBehaviour
             novoTiro.Mova(direcao);
         }
     }
-    //ELEVADOR
-    private void OnTriggerEnter2D(Collider2D c)
+   public void VidaPerdida()
     {
-        
+        if (PlayerMoving.main.vidao == true)
+        {
+            vidaAtual -=1 ;
+            int index = vidaAtual;
+            Destroy(vida[index]);
+            
+        }
        
     }
 }
