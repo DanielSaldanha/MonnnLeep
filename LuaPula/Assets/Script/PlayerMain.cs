@@ -20,7 +20,10 @@ public class PlayerMain : MonoBehaviour
     void Update()
     {
         Clicado();
-       
+       if(vidaAtual == 0)
+        {
+            Destroy(gameObject);
+        }
 
 
     }

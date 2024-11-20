@@ -23,6 +23,9 @@ public class PlayerMoving : MonoBehaviour
     Rigidbody2D rb;
     [SerializeField] float speed, jump;
     [SerializeField] int cu = 0;
+    float Mover;
+    public bool pulo;
+   // Animator anim;
 
     //PORTA
     [SerializeField] int Chave = 0;
@@ -30,13 +33,16 @@ public class PlayerMoving : MonoBehaviour
 
     //VIDA
     public bool vidao;
+   public float MaxTimeFrame, tempo;
+
 
    
     void Start()
     {
-       
+        tempo = MaxTimeFrame;
         main = this;
         rb = GetComponent<Rigidbody2D>();
+      //  anim = GetComponent<Animator>();
         autismo = false;
         autismo2 = false;
     }
@@ -44,6 +50,11 @@ public class PlayerMoving : MonoBehaviour
     {
         Pulo();
         BotaoElevador();
+        if(tempo < MaxTimeFrame)
+        {
+            tempo += Time.deltaTime;
+        }
+        
        
     }
     void FixedUpdate()
@@ -53,8 +64,19 @@ public class PlayerMoving : MonoBehaviour
     }
     void Andando()
     {
-        float Mover = Input.GetAxis("Horizontal");
+         Mover = Input.GetAxis("Horizontal");
         rb.velocity = new Vector2(Mover * speed, rb.velocity.y);
+        /*
+        if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))
+        {
+            anim.SetInteger("mova", 0);
+        }
+        else
+        {
+            anim.SetInteger("mova", 1);
+        }
+        */
+
     }
     void Pulo()
     {
@@ -66,6 +88,7 @@ public class PlayerMoving : MonoBehaviour
             }
             rb.AddForce(new Vector2(0, jump));
             cu = 1;
+            pulo = true;
            
         }
     
@@ -109,9 +132,9 @@ public class PlayerMoving : MonoBehaviour
             Clone2.transform.parent = PCP.transform;
 
         }
-        if(c.tag == "inimigo")
+        if(c.tag == "inimigo" && tempo >= MaxTimeFrame)
         {
-          
+            tempo = 0;
             vidao = true;
             PlayerMain main = FindObjectOfType<PlayerMain>();
             main.VidaPerdida();
@@ -124,12 +147,13 @@ public class PlayerMoving : MonoBehaviour
         {
             Destroy(Clone);
         }
-        if (c.tag == "inimigo")
+        if (c.tag == "inimigo" )
         {
-
+            
             vidao = false;
+           
         }
-
+       
     }
 
     private void OnCollisionEnter2D(Collision2D c)
@@ -137,6 +161,7 @@ public class PlayerMoving : MonoBehaviour
         if (c.gameObject.layer == 8)
         {
             cu = 0;
+            pulo = false;
         }
        
     }
