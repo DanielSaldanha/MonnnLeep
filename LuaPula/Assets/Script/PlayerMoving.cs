@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMoving : MonoBehaviour
 {
     //VARIAVEIS MULTI USO
-    GameObject Clone, Clone2;
+    GameObject Clone, Clone2,Clone3;
     [SerializeField] GameObject PCP;//Posiçao Cabeça Player
    public static PlayerMoving main;
 
@@ -34,6 +34,8 @@ public class PlayerMoving : MonoBehaviour
     //VIDA
     public bool vidao;
    public float MaxTimeFrame, tempo;
+    //NPC
+   [SerializeField] public Transform CP;//Chain Position
 
 
    
@@ -66,16 +68,7 @@ public class PlayerMoving : MonoBehaviour
     {
          Mover = Input.GetAxis("Horizontal");
         rb.velocity = new Vector2(Mover * speed, rb.velocity.y);
-        /*
-        if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))
-        {
-            anim.SetInteger("mova", 0);
-        }
-        else
-        {
-            anim.SetInteger("mova", 1);
-        }
-        */
+        
 
     }
     void Pulo()
@@ -139,7 +132,11 @@ public class PlayerMoving : MonoBehaviour
             PlayerMain main = FindObjectOfType<PlayerMain>();
             main.VidaPerdida();
         }
-     
+        if(c.tag == "NPC")
+        {
+            Clone3 = Instantiate(obj, CP.position, Quaternion.identity);
+        }
+
     }
     private void OnTriggerExit2D(Collider2D c)
     {
@@ -153,7 +150,11 @@ public class PlayerMoving : MonoBehaviour
             vidao = false;
            
         }
-       
+        if (c.tag == "NPC")
+        {
+            Destroy(Clone3);
+        }
+
     }
 
     private void OnCollisionEnter2D(Collision2D c)

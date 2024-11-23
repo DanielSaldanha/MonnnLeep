@@ -5,8 +5,9 @@ using UnityEngine;
 public class Dialogo : MonoBehaviour
 {
     public Sprite profile;
-    public string speechTXT;
+    public string[] speechTXT;
     public string actroName;
+    bool permissao,permissao2;
 
   //  public LayerMask playerLayer;
    // public float radious;
@@ -20,16 +21,36 @@ public class Dialogo : MonoBehaviour
    
     void Update()
     {
-        
+        if(permissao == true)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                Interacao();
+                permissao = false;
+            }
+        }
+     
     }
     private void OnTriggerEnter2D(Collider2D c)
     {
         if(c.tag == "Player")
         {
-            Interacao();
+            permissao = true;
+           // Interacao();
         }
             
     }
+    
+    private void OnTriggerExit2D(Collider2D c)
+    {
+        if (c.tag == "Player")
+        {
+            if(permissao == true) permissao = false;
+
+        }
+
+    }
+    
     public void Interacao()
     {
         dc.Speech(profile, speechTXT, actroName);
